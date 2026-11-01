@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./fonts.css";
+@config "../tailwind.config.ts";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: "Playfair Display Variable", serif;
+  --font-script: "UTM Wedding KT", "Playfair Display Variable", cursive;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--background);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--background);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--muted);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: hsl(38.18 57.89% 96.27%);
+  --foreground: hsl(22.5 10.26% 15.29%);
+  --primary: hsl(348.89 40.70% 39.02%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(38.94 39.83% 53.73%);
+  --muted: hsl(37.14 42.86% 90.39%);
+  --muted-foreground: hsl(24 10.31% 38.04%);
+  --border: hsl(36 35.71% 83.53%);
+  --destructive: hsl(3.22 71.29% 40.98%);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply m-0 bg-muted font-sans text-base leading-relaxed text-foreground; }
+  h1, h2, h3 { @apply font-serif; }
+}
+
+.reveal { transition: opacity 600ms ease, transform 600ms ease; }
+.reveal[data-visible="false"] { opacity: 0; transform: translateY(1rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal[data-visible="false"] { opacity: 1; transform: none; }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env*
+!.env.example
+*.local
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Bản gốc ảnh/nhạc/phông (không đóng gói, giữ trên máy)
+_photos-all/
+_originals/

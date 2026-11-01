@@ -1,0 +1,46 @@
+{
+  "measuredAt": "2026-11-01T14:15:55.627Z",
+  "url": "http://127.0.0.1:4173",
+  "conditions": "Lighthouse mobile defaults, simulated slow 4G, cold navigation, Vite preview",
+  "note": "Navigation measures the cover. Opened-page interaction/accessibility is checked by Playwright.",
+  "runs": [
+    {
+      "performance": 95,
+      "lcpMs": 2406.4979999999996,
+      "cls": 0.01475242481221248,
+      "tbtMs": 180.33399999999983,
+      "initialJsGzipBytes": 99199
+    },
+    {
+      "performance": 95,
+      "lcpMs": 2407.536,
+      "cls": 0.013843159202708951,
+      "tbtMs": 172.48799999999983,
+      "initialJsGzipBytes": 99199
+    },
+    {
+      "performance": 96,
+      "lcpMs": 2409.21315,
+      "cls": 0.01475242481221248,
+      "tbtMs": 161.42895,
+      "initialJsGzipBytes": 99199
+    }
+  ],
+  "median": {
+    "performance": 95,
+    "lcpMs": 2407.536,
+    "cls": 0.01475242481221248,
+    "tbtMs": 172.48799999999983,
+    "initialJsGzipBytes": 99199
+  },
+  "lighthouseVersion": "13.6.0",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "throttling": {
+    "rttMs": 150,
+    "throughputKbps": 1638.4,
+    "requestLatencyMs": 562.5,
+    "downloadThroughputKbps": 1474.5600000000002,
+    "uploadThroughputKbps": 675,
+    "cpuSlowdownMultiplier": 4
+  }
+}
