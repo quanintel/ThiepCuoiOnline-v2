@@ -12,7 +12,6 @@ import { Cover } from '@/features/cover/Cover'
 import { useOpenInvitation } from '@/features/cover/useOpenInvitation'
 import { Closing } from '@/features/footer/Closing'
 import { GiftBoxes } from '@/features/gift/GiftBoxes'
-import { Hero } from '@/features/hero/Hero'
 import { MusicButton } from '@/features/music/MusicButton'
 import { useMusic } from '@/features/music/useMusic'
 
@@ -41,13 +40,8 @@ export default function App() {
           element.inert = !isOpen
           if (isOpen && document.activeElement?.closest('#cover-overlay')) element.focus({ preventScroll: true })
         }}
-        className="mx-auto min-h-dvh w-full max-w-[480px] bg-background shadow-sm"
+        className="mx-auto min-h-dvh w-full max-w-[480px] bg-floral shadow-sm"
       >
-        {/* [1] Hero */}
-        <Section id="hero">
-          <Hero />
-        </Section>
-
         {/* [2] Cô dâu chú rể */}
         <Section id="couple" title="Cô dâu & chú rể">
           <Couple />

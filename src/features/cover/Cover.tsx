@@ -42,7 +42,7 @@ export function Cover({ isOpen, onOpen }: CoverProps) {
     <aside
       id="cover-overlay"
       aria-label="Bìa thiệp cưới"
-      className={`fixed inset-0 z-50 flex min-h-[100dvh] h-[100dvh] w-full flex-col items-center justify-between bg-background px-6 py-16 text-center transition-opacity duration-400 ease-out ${
+      className={`fixed inset-0 z-50 flex min-h-[100dvh] h-[100dvh] w-full flex-col items-center justify-between bg-floral-cover px-6 py-16 text-center transition-opacity duration-400 ease-out ${
         isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >

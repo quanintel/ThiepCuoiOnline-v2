@@ -5,7 +5,6 @@ Bố cục lấy cảm hứng từ trang mẫu (chỉ bố cục, không lấy p
 ## Sitemap (thứ tự cuộn)
 ```
 [0] Cover (overlay toàn màn hình)  → "Mở thiệp"
-[1] Hero            "sắp về chung một nhà"
 [2] Cô dâu chú rể   (ảnh + vai trò)
 [3] Thông tin lễ    Thẻ Vu Quy · Thẻ Thành Hôn · Bố mẹ hai bên
 [4] Album           slide ngang + lightbox

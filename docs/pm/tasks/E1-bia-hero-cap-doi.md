@@ -16,11 +16,8 @@ Mốc **M1**. Phụ thuộc E0. FR-01, 02, 03. UC-01. Wireframe: [UX-02 §0–2]
 - **Test:** thấy tên, ngày, nút; bấm nút gọi `onOpen`; sau khi `isOpen` thì không còn trong tài liệu.
 - [ ] Test · [ ] Cài đặt · [ ] Commit
 
-## E1-T3 · Hero (FE)
-- **Files:** `src/features/hero/Hero.tsx`, `Hero.test.tsx`.
-- **Hiển thị:** ảnh nền cặp đôi (giữ chỗ nếu chưa có), chữ duy nhất "sắp về chung một nhà" từ `content`.
-- **Test:** có đúng chữ; **không** có "Chúng tôi".
-- [ ] Test · [ ] Cài đặt · [ ] Commit
+## E1-T3 · Hero (FE) · ĐÃ BỎ (Chủ dự án quyết định 01.11.2026)
+- Đã bỏ khỏi phạm vi dự án. Sau bìa "Mở thiệp", trang chuyển thẳng tới phần Cô dâu chú rể.
 
 ## E1-T4 · Cô dâu chú rể (UX + FE)
 - **Files:** `src/features/couple/Couple.tsx`, `Couple.test.tsx`.
@@ -29,4 +26,4 @@ Mốc **M1**. Phụ thuộc E0. FR-01, 02, 03. UC-01. Wireframe: [UX-02 §0–2]
 - [ ] Test · [ ] Cài đặt · [ ] Commit
 
 ## DoD của epic
-Bấm "Mở thiệp" vào được thiệp; hero và cặp đôi khớp BA-05; chủ dự án duyệt giao diện bước đầu.
+Bấm "Mở thiệp" vào được thiệp; cặp đôi khớp BA-05; chủ dự án duyệt giao diện bước đầu.

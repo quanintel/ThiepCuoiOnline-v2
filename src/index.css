@@ -62,3 +62,15 @@
   }
   .reveal[data-visible="false"] { opacity: 1; transform: none; }
 }
+
+/* Nền họa tiết hoa lá màu nước (ảnh Unsplash, Unsplash License), phủ lớp kem mờ để chữ luôn đọc rõ */
+.bg-floral,
+.bg-floral-cover {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(rgb(251 247 240 / 0.8), rgb(251 247 240 / 0.8)),
+    url('/images/bg-floral.webp');
+  background-position: top center;
+}
+.bg-floral { background-size: 100% auto; background-repeat: repeat-y; }
+.bg-floral-cover { background-size: cover; background-repeat: no-repeat; }

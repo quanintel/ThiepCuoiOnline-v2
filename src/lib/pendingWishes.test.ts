@@ -66,3 +66,16 @@ it('không lỗi khi chính getter localStorage bị chặn', () => {
   expect(() => addPending(first)).not.toThrow()
   expect(reconcile([])).toEqual([])
 })
+
+it('stillPending: lời chúc đã bị xoá khỏi Sheet (không còn trong danh sách) bị gỡ khỏi storage', () => {
+  addPending(first); addPending(second)
+  expect(reconcile([], ['w_2'])).toEqual([second])
+  expect(getPending()).toEqual([second])
+})
+
+it('stillPending rỗng gỡ hết lời chờ; không truyền thì giữ nguyên (API cũ chưa hỗ trợ)', () => {
+  addPending(first); addPending(second)
+  expect(reconcile([])).toEqual([first, second])
+  expect(reconcile([], [])).toEqual([])
+  expect(getPending()).toEqual([])
+})

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { env } from '@/config/env'
-import { ApiError, fetchWishes, submitRsvp, submitWish } from '@/lib/api'
+import { ApiError, fetchPendingStatus, fetchWishes, submitRsvp, submitWish } from '@/lib/api'
 
 const wish = { id: 'w_1', name: 'Khách mời', message: 'Chúc mừng!', createdAt: '2026-11-01T10:00:00+07:00' }
 const fetchMock = vi.fn()
@@ -94,4 +94,29 @@ it('mock có độ trễ, không fetch, không tự đưa lời mới vào danh 
   await vi.runAllTimersAsync()
   expect(await next).toEqual(approved)
   expect(fetchMock).not.toHaveBeenCalled()
+})
+
+it('fetchPendingStatus gọi action=status kèm ids và trả các id còn chờ duyệt trong Sheet', async () => {
+  fetchMock.mockResolvedValue(reply({ ok: true, data: { pending: ['w_2'] } }))
+  expect(await fetchPendingStatus(['w_1', 'w_2'])).toEqual(['w_2'])
+  const url = new URL(fetchMock.mock.calls[0][0])
+  expect(url.searchParams.get('action')).toBe('status')
+  expect(url.searchParams.get('ids')).toBe('w_1,w_2')
+  expect(url.searchParams.get('source')).toBe('invitation')
+})
+
+it('fetchPendingStatus không gọi mạng khi không có id', async () => {
+  expect(await fetchPendingStatus([])).toEqual([])
+  expect(fetchMock).not.toHaveBeenCalled()
+})
+
+it('fetchPendingStatus ở chế độ mock coi mọi id còn tồn tại, không gọi mạng', async () => {
+  Object.assign(env, { useMock: true })
+  expect(await fetchPendingStatus(['w_1'])).toEqual(['w_1'])
+  expect(fetchMock).not.toHaveBeenCalled()
+})
+
+it('fetchPendingStatus báo lỗi khi API cũ chưa hỗ trợ action=status', async () => {
+  fetchMock.mockResolvedValue(reply({ ok: false, error: 'validation', message: 'Hành động không hợp lệ' }))
+  await expect(fetchPendingStatus(['w_1'])).rejects.toMatchObject({ kind: 'validation' })
 })

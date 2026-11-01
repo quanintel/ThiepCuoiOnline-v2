@@ -67,8 +67,6 @@ export const defaultGifts: GiftInfo[] = [
 
 export const content = {
   cover: { names: 'Anh Quân & Mai Hương', date: '24.11.2026', openLabel: 'Mở thiệp' },
-  hero: 'sắp về chung một nhà',
-  heroImage: '/images/hero.webp',
   couple: [
     { name: 'Kiều Anh Quân', role: 'Trưởng nam', image: '/images/groom.webp' },
     { name: 'Tôn Mai Hương', role: 'Trưởng nữ', image: '/images/bride.webp' },

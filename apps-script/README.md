@@ -136,3 +136,6 @@ Nếu bạn thực hiện bất kỳ chỉnh sửa nào trong file `Code.gs` ho�
 
 > [!IMPORTANT]
 > Nếu bạn chỉ bấm Lưu trong trình soạn thảo mà không tạo "Phiên bản mới (New version)" trong "Quản lý bản triển khai", Google Apps Script vẫn sẽ tiếp tục chạy mã nguồn cũ trước đó!
+
+## Cập nhật 01.11.2026: sổ lưu bút hiện đúng sau khi xoá dòng
+Mã mới thêm `action=status` và giảm cache lời chúc xuống 20 giây. Sau khi dán `Code.gs` mới, nhớ **Triển khai > Quản lý bản triển khai > Sửa > Phiên bản mới > Triển khai** (URL giữ nguyên). Chưa triển khai lại thì web vẫn chạy nhưng lời "Đang chờ duyệt" đã xoá khỏi Sheet sẽ chưa tự mất.

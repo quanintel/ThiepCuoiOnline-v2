@@ -1,13 +1,15 @@
 import { test, expect, openInvitation } from './fixtures'
 
-test('Cover → Mở thiệp → Hero đúng copy', async ({ page }) => {
+test('Cover → Mở thiệp → Cô dâu chú rể đúng copy', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Anh Quân & Mai Hương')
   await page.getByRole('button', { name: 'Mở thiệp', exact: true }).click()
   await expect(page.locator('#cover-overlay')).toBeHidden()
-  const hero = page.locator('#hero')
-  await expect(hero.getByText('sắp về chung một nhà', { exact: true })).toBeVisible()
-  await expect(hero).not.toContainText('Chúng tôi')
+  const couple = page.locator('#couple')
+  await expect(couple.getByRole('heading', { name: 'Cô dâu & chú rể' })).toBeVisible()
+  await expect(couple.getByText('Kiều Anh Quân')).toBeVisible()
+  await expect(couple.getByText('Tôn Mai Hương')).toBeVisible()
+  await expect(page.locator('main')).not.toContainText('Chúng tôi')
 })
 
 test('hai thẻ lễ giữ đúng giờ, địa điểm và địa chỉ cũ', async ({ page }) => {

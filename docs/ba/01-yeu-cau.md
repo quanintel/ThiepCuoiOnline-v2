@@ -28,7 +28,7 @@ Cặp đôi Kiều Anh Quân – Tôn Mai Hương cần một thiệp cưới on
 | ID | Yêu cầu | Ưu tiên |
 |---|---|---|
 | FR-01 | Màn bìa với tên, ngày và nút "Mở thiệp"; bấm mở vào thiệp và bật nhạc | Must |
-| FR-02 | Hero chỉ có dòng "sắp về chung một nhà" | Must |
+| FR-02 | Hero: dòng "sắp về chung một nhà" | Đã bỏ (chủ dự án quyết định 01.11.2026) |
 | FR-03 | Giới thiệu cô dâu chú rể (ảnh, vai trò Trưởng nam/Trưởng nữ) | Must |
 | FR-04 | Hai thẻ lễ (Vu Quy, Thành Hôn) đủ giờ, ngày dương + âm, địa điểm; Vu Quy có thêm "Địa chỉ cũ" | Must |
 | FR-05 | Thông tin bố mẹ hai bên | Must |

@@ -18,12 +18,6 @@ Chỉ minh hoạ bố cục và thứ bậc nội dung, chưa phải thiết k�
 │    [ Mở thiệp ]      │
 └──────────────────────┘
 ```
-## 1 · Hero
-```
-│  (ảnh nền cặp đôi)   │
-│  sắp về chung        │
-│  một nhà             │
-```
 ## 2 · Cô dâu chú rể
 ```
 │ [ảnh]        [ảnh]   │

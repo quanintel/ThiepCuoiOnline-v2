@@ -20,7 +20,7 @@ Kế hoạch này là **chỉ mục**. Task chi tiết (file, giao diện, test,
 - Chỉ tiếng Việt; không i18n.
 - Lễ Vu Quy: 13:00 Thứ 3, 24.11.2026 (tức 16.10 năm Bính Ngọ), "Tại Tư Gia", Thôn Phú Cường, Ngọc Thiện, Bắc Ninh; địa chỉ cũ Thôn An Lạc 1, Việt Ngọc, Tân Yên, Bắc Giang. **Không** hiển thị "Sân bóng An Lạc".
 - Lễ Thành Hôn: 17:00 Thứ 3, 24.11.2026 (tức 16.10 năm Bính Ngọ), Minh Dương Palace, Số 98 Hồng Đô, Phú Đô, Từ Liêm, Hà Nội.
-- Hero chỉ có "sắp về chung một nhà" (không có chữ "Chúng tôi"). Bỏ: lời cảm tạ, thông tin cần biết, chia sẻ thiệp, kể lại khoảnh khắc trong album, lịch trình ngày cưới.
+- Không có phần hero. Bỏ: lời cảm tạ, thông tin cần biết, chia sẻ thiệp, kể lại khoảnh khắc trong album, lịch trình ngày cưới.
 - Giới hạn: tên 1–60 ký tự; lời chúc 1–300; lời nhắn RSVP 0–300; số người 1–10; giãn cách gửi 30 giây.
 - Chỉ lời chúc có `Duyệt` = TRUE được trả ra; lời chúc hiển thị là văn bản thuần.
 - Ngân sách: JS ban đầu khoảng 200 KB gzip trở xuống; LCP dưới 2,5 giây trên 4G; ảnh WebP lazy-load.
@@ -41,7 +41,7 @@ Phụ thuộc: E0 → (E1, E2, E3 song song) → E4 (cần dữ liệu lễ củ
 | Epic | Nội dung | Task | File chi tiết |
 |---|---|---|---|
 | E0 | Khởi tạo, shadcn, token, kiểu dữ liệu, nội dung, OG, khung trang | T1–T5 | [E0](../../pm/tasks/E0-khoi-tao.md) |
-| E1 | Hook mở thiệp, Cover, Hero, Cô dâu chú rể | T1–T4 | [E1](../../pm/tasks/E1-bia-hero-cap-doi.md) |
+| E1 | Hook mở thiệp, Cover, Cô dâu chú rể (hero: đã bỏ) | T1–T4 | [E1](../../pm/tasks/E1-bia-hero-cap-doi.md) |
 | E2 | Thẻ lễ, khối lễ + gia đình, link Maps, lời kết (lịch trình: đã bỏ) | T1–T5 | [E2](../../pm/tasks/E2-le-gia-dinh-ban-do-lich-trinh.md) |
 | E3 | Ảnh album, slide ngang, lightbox | T1–T3 | [E3](../../pm/tasks/E3-album.md) |
 | E4 | Đếm ngược, hook + khối, lịch tháng, thêm vào lịch | T1–T4 | [E4](../../pm/tasks/E4-dem-nguoc-lich.md) |

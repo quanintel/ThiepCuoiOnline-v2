@@ -100,6 +100,6 @@ test('JS tải ban đầu ≤ 120 KB gzip, phần dưới chưa tải; giảm ch
   expect([...scripts].some((path) => /QrDialog|RsvpForm|Guestbook|Album/.test(path))).toBe(false)
   await page.getByRole('button', { name: 'Mở thiệp', exact: true }).click()
   await expect(page.locator('#cover-overlay')).toBeHidden()
-  await expect(page.locator('#hero')).toHaveCSS('opacity', '1')
-  expect(await page.locator('#hero').evaluate((element) => getComputedStyle(element).transitionDuration)).toBe('0s')
+  await expect(page.locator('#couple')).toHaveCSS('opacity', '1')
+  expect(await page.locator('#couple').evaluate((element) => getComputedStyle(element).transitionDuration)).toBe('0s')
 })

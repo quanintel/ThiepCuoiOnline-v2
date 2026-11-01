@@ -29,9 +29,12 @@ export function addPending(wish: Wish): void {
   save([...getPending(), wish])
 }
 
-export function reconcile(approved: Wish[]): Wish[] {
+/** Gỡ lời chờ duyệt đã được duyệt. Nếu biết danh sách id còn nằm trong Sheet (stillPending),
+ * gỡ luôn những lời đã bị xoá khỏi Sheet; không truyền thì giữ nguyên (API cũ chưa hỗ trợ). */
+export function reconcile(approved: Wish[], stillPending?: string[]): Wish[] {
   const ids = new Set(approved.map((wish) => wish.id))
-  const pending = getPending().filter((wish) => !ids.has(wish.id))
+  const alive = stillPending ? new Set(stillPending) : null
+  const pending = getPending().filter((wish) => !ids.has(wish.id) && (!alive || alive.has(wish.id)))
   save(pending)
   return pending
 }

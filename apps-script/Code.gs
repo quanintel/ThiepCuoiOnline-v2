@@ -12,7 +12,7 @@ var SHEET_WISHES = 'Wishes';
 var HEADERS_WISHES = ['id', 'createdAt', 'name', 'message', 'Duyệt'];
 
 var CACHE_KEY_WISHES = 'approved_wishes_v1';
-var CACHE_TTL_SECONDS = 60; // Bộ nhớ đệm 60 giây
+var CACHE_TTL_SECONDS = 20; // Bộ nhớ đệm 20 giây: đủ chống dồn truy cập, mà sửa/xoá trong Sheet hiện lên web gần như ngay
 var MAX_WISHES_RETURNED = 200; // Tối đa 200 lời chúc mới nhất
 
 /**
@@ -22,11 +22,20 @@ var MAX_WISHES_RETURNED = 200; // Tối đa 200 lời chúc mới nhất
 function doGet(e) {
   try {
     var action = (e && e.parameter) ? e.parameter.action : '';
+    // ?action=status&ids=w_1,w_2 : trong các id này, id nào còn nằm trong Sheet và CHƯA được duyệt.
+    // Web dùng để gỡ các lời "đang chờ duyệt" đã bị xoá khỏi Sheet. Không dùng cache.
+    if (action === 'status') {
+      return json_({
+        ok: true,
+        data: { pending: pendingStatus_(e.parameter.ids) }
+      });
+    }
+
     if (action !== 'wishes') {
       return json_({
         ok: false,
         error: 'validation',
-        message: 'Hành động không hợp lệ. Chỉ hỗ trợ action=wishes'
+        message: 'Hành động không hợp lệ. Hỗ trợ action=wishes hoặc action=status'
       });
     }
 
@@ -53,7 +62,9 @@ function doGet(e) {
       for (var i = 0; i < values.length; i++) {
         var row = values[i];
         var isApproved = (row[4] === true || String(row[4]).trim().toUpperCase() === 'TRUE');
-        if (isApproved) {
+        // Bỏ qua dòng đã bị xoá dở (không còn id hoặc nội dung) dù ô tick vẫn còn.
+        var hasContent = String(row[0]).trim() !== '' && String(row[3]).trim() !== '';
+        if (isApproved && hasContent) {
           approvedList.push({
             id: String(row[0] || ''),
             name: String(row[2] || ''),
@@ -90,6 +101,38 @@ function doGet(e) {
       message: err.message || 'Lỗi xử lý máy chủ'
     });
   }
+}
+
+/**
+ * Trong danh sách id (chuỗi, ngăn cách bằng dấu phẩy), trả các id còn trong tab Wishes và chưa được duyệt.
+ * Id đã bị xoá khỏi Sheet, hoặc đã được duyệt, không có trong kết quả.
+ * @param {string} idsParam Ví dụ 'w_1a2b3c4d,w_9f8e7d6c'
+ * @returns {string[]}
+ */
+function pendingStatus_(idsParam) {
+  var wanted = {};
+  var count = 0;
+  String(idsParam || '').split(',').forEach(function (raw) {
+    var id = raw.trim();
+    if (count < 50 && /^w_[A-Za-z0-9]{1,16}$/.test(id) && !wanted[id]) {
+      wanted[id] = true;
+      count++;
+    }
+  });
+  if (count === 0) return [];
+
+  var sheet = getSheetOrCreate_(SHEET_WISHES);
+  var lastRow = sheet.getLastRow();
+  var pending = [];
+  if (lastRow > 1) {
+    var values = sheet.getRange(2, 1, lastRow - 1, 5).getValues();
+    for (var i = 0; i < values.length; i++) {
+      var id = String(values[i][0]).trim();
+      var approved = values[i][4] === true || String(values[i][4]).trim().toUpperCase() === 'TRUE';
+      if (wanted[id] && !approved && pending.indexOf(id) === -1) pending.push(id);
+    }
+  }
+  return pending;
 }
 
 /**

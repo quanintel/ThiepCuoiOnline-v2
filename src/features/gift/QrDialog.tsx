@@ -8,7 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Download } from 'lucide-react'
+import { Download, ScanLine } from 'lucide-react'
+import { toast } from 'sonner'
+import { openZalo } from '@/lib/zalo'
 
 interface QrDialogProps {
   gift: GiftInfo | null
@@ -24,6 +26,25 @@ export function QrDialog({ gift, open, onOpenChange }: QrDialogProps) {
     gift.id === 'groom'
       ? 'Mã QR mừng cưới chú rể'
       : 'Mã QR mừng cưới cô dâu'
+
+  // Lưu ảnh QR vào máy rồi mở Zalo để người dùng quét từ thư viện ảnh.
+  const handleScanWithZalo = async () => {
+    const link = document.createElement('a')
+    link.href = gift.qrSrc
+    link.download = new URL(gift.qrSrc, window.location.href).pathname.split('/').pop() ?? 'qr.png'
+    link.rel = 'noopener noreferrer'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    // Chờ một chút để việc lưu ảnh kịp bắt đầu trước khi chuyển sang Zalo.
+    await new Promise((resolve) => window.setTimeout(resolve, 400))
+    const opened = await openZalo()
+    if (!opened) {
+      toast('Chưa mở được Zalo', {
+        description: 'Hãy tự mở Zalo, bấm biểu tượng quét QR rồi chọn ảnh QR vừa lưu.',
+      })
+    }
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -77,8 +98,18 @@ export function QrDialog({ gift, open, onOpenChange }: QrDialogProps) {
                 <span>Lưu QR</span>
               </a>
             </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleScanWithZalo}
+              className="min-h-11 w-full rounded-full py-5 text-sm font-sans"
+            >
+              <ScanLine className="h-4 w-4" />
+              <span>Quét bằng Zalo</span>
+            </Button>
             <p className="text-sm text-muted-foreground leading-normal">
-              Nhấn giữ ảnh để lưu nếu trình duyệt webview không hỗ trợ tải trực tiếp.
+              Bấm &ldquo;Quét bằng Zalo&rdquo;: ảnh QR được lưu và Zalo mở ra. Trong Zalo, bấm biểu tượng quét QR rồi
+              chọn ảnh vừa lưu. Nhấn giữ ảnh để lưu nếu trình duyệt không tải trực tiếp.
             </p>
           </div>
         </div>

@@ -18,9 +18,8 @@ describe('nội dung thiệp theo BA-05', () => {
     expect(JSON.stringify(content)).not.toContain('Sân bóng')
   })
 
-  it('hero chỉ có dòng đã chốt', () => {
-    expect(content.hero).toBe('sắp về chung một nhà')
-    expect(content.hero).not.toContain('Chúng tôi')
+  it('không có chữ "Chúng tôi" trong nội dung', () => {
+    expect(JSON.stringify(content)).not.toContain('Chúng tôi')
   })
 
   it('giữ nguyên tên cặp đôi và gia đình', () => {

@@ -6,7 +6,7 @@ Trạng thái: ✅ đã có · ⏳ chờ chủ dự án gửi (dùng giữ chỗ
 - Tên: Anh Quân & Mai Hương · Ngày: 24.11.2026 · Nút "Mở thiệp". ✅
 
 ## Hero
-- Dòng duy nhất: **"sắp về chung một nhà"**. (Đã bỏ chữ "Chúng tôi".) ✅
+- Đã bỏ theo quyết định của chủ dự án (01.11.2026). Sau bìa "Mở thiệp", trang chuyển thẳng tới Cô dâu chú rể.
 
 ## Cô dâu chú rể
 - "Trưởng nam Kiều Anh Quân" · "Trưởng nữ Tôn Mai Hương". ✅
@@ -46,4 +46,4 @@ Trạng thái: ✅ đã có · ⏳ chờ chủ dự án gửi (dùng giữ chỗ
 - Title đề xuất: "Thiệp cưới Anh Quân & Mai Hương – 24.11.2026" · Description: "Trân trọng kính mời bạn đến chung vui cùng gia đình chúng tôi." · Ảnh OG ⏳ (1200×630).
 
 ## Đã bỏ
-Lời cảm tạ · Thông tin cần biết · Chia sẻ thiệp · Kể lại khoảnh khắc (album) · Lịch trình ngày cưới.
+Lời cảm tạ · Thông tin cần biết · Chia sẻ thiệp · Kể lại khoảnh khắc (album) · Lịch trình ngày cưới · Hero (sắp về chung một nhà).

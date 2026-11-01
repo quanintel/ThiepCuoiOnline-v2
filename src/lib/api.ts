@@ -16,6 +16,7 @@ const wishesSchema = z.array(z.object({
   id: z.string().min(1), name: z.string(), message: z.string(), createdAt: z.iso.datetime({ offset: true }),
 }))
 const idSchema = z.object({ id: z.string().min(1) })
+const statusSchema = z.object({ pending: z.array(z.string()) })
 const delay = () => new Promise<void>((resolve) => setTimeout(resolve, 150))
 
 async function request<T>(url: string, schema: z.ZodType<T>, init?: RequestInit): Promise<T> {
@@ -53,6 +54,20 @@ export async function fetchWishes(): Promise<Wish[]> {
   const url = new URL(env.apiUrl)
   url.searchParams.set('action', 'wishes')
   return request(url.href, wishesSchema)
+}
+
+/** Trong các lời chúc chờ duyệt (theo id), trả về những lời còn nằm trong Sheet và chưa được duyệt.
+ * Lời đã bị xoá khỏi Sheet không có trong kết quả. */
+export async function fetchPendingStatus(ids: string[]): Promise<string[]> {
+  if (ids.length === 0) return []
+  if (env.useMock) {
+    await delay()
+    return ids
+  }
+  const url = new URL(env.apiUrl)
+  url.searchParams.set('action', 'status')
+  url.searchParams.set('ids', ids.join(','))
+  return (await request(url.href, statusSchema)).pending
 }
 
 async function submit(action: 'rsvp' | 'wish', input: RsvpInput | WishInput): Promise<{ id: string }> {

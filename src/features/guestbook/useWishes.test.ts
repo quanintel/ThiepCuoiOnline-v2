@@ -1,14 +1,17 @@
 import { act, renderHook, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
-import { fetchWishes } from '@/lib/api'
+import { fetchPendingStatus, fetchWishes } from '@/lib/api'
 import { addPending, getPending } from '@/lib/pendingWishes'
 import { useWishes } from '@/features/guestbook/useWishes'
 import type { Wish } from '@/types'
 
-vi.mock('@/lib/api', () => ({ fetchWishes: vi.fn() }))
+vi.mock('@/lib/api', () => ({ fetchWishes: vi.fn(), fetchPendingStatus: vi.fn() }))
 const first: Wish = { id: 'w_1', name: 'A', message: 'Chúc mừng!', createdAt: '2026-11-01T10:00:00Z' }
 const second: Wish = { ...first, id: 'w_2', name: 'B' }
-beforeEach(() => { localStorage.clear(); vi.mocked(fetchWishes).mockReset() })
+beforeEach(() => {
+  localStorage.clear(); vi.mocked(fetchWishes).mockReset()
+  vi.mocked(fetchPendingStatus).mockReset().mockImplementation(async (ids: string[]) => ids)
+})
 afterEach(() => vi.restoreAllMocks())
 
 it('loading → ready khi API trả lời chúc', async () => {
@@ -95,4 +98,38 @@ it('storage bị chặn vẫn giữ lời vừa gửi trong bộ nhớ cho đế
   act(() => result.current.reload())
   await waitFor(() => expect(result.current.approved).toEqual([first]))
   expect(result.current.pending).toEqual([])
+})
+
+it('lời chờ duyệt đã bị xoá khỏi Sheet biến mất khỏi state và storage', async () => {
+  addPending(first); addPending(second)
+  vi.mocked(fetchWishes).mockResolvedValue([])
+  vi.mocked(fetchPendingStatus).mockResolvedValue(['w_2'])
+  const { result } = renderHook(useWishes)
+  await waitFor(() => expect(result.current.status).toBe('ready'))
+  expect(fetchPendingStatus).toHaveBeenCalledWith(['w_1', 'w_2'])
+  expect(result.current.pending).toEqual([second])
+  expect(getPending()).toEqual([second])
+})
+
+it('API cũ chưa hỗ trợ status thì giữ nguyên lời chờ duyệt, không báo lỗi', async () => {
+  addPending(first)
+  vi.mocked(fetchWishes).mockResolvedValue([])
+  vi.mocked(fetchPendingStatus).mockRejectedValue(new Error('validation'))
+  const { result } = renderHook(useWishes)
+  await waitFor(() => expect(result.current.status).toBe('ready'))
+  expect(result.current.pending).toEqual([first])
+  expect(getPending()).toEqual([first])
+})
+
+it('lời vừa gửi trong lúc đang tải không bị gỡ nhầm vì không nằm trong danh sách đã hỏi', async () => {
+  vi.mocked(fetchWishes).mockResolvedValue([])
+  let release!: (ids: string[]) => void
+  addPending(first)
+  vi.mocked(fetchPendingStatus).mockReturnValue(new Promise((done) => { release = done }))
+  const { result } = renderHook(useWishes)
+  await waitFor(() => expect(fetchPendingStatus).toHaveBeenCalled())
+  act(() => result.current.addPending(second))
+  await act(async () => release([]))
+  await waitFor(() => expect(result.current.status).toBe('ready'))
+  expect(result.current.pending).toEqual([second])
 })

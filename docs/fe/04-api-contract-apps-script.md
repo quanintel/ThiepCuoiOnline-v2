@@ -62,3 +62,10 @@ submitWish(input: WishInput): Promise<{ id: string }>
 class ApiError extends Error { kind: 'network' | 'server' | 'validation' }
 ```
 Khi `VITE_USE_MOCK=true`: trả dữ liệu giả có độ trễ nhỏ, `submit*` luôn thành công.
+
+## `GET ?action=status&ids=w_1,w_2` (thêm 01.11.2026)
+Dùng để web gỡ các lời "Đang chờ duyệt" đã bị xoá khỏi Sheet (lời chờ duyệt chỉ lưu ở trình duyệt người gửi).
+- `ids`: tối đa 50 id dạng `w_xxxxxxxx`, ngăn cách bằng dấu phẩy; id sai định dạng bị bỏ qua.
+- Trả `{ "ok": true, "data": { "pending": ["w_2"] } }`: chỉ gồm id **còn trong Sheet và chưa duyệt**. Id đã duyệt (có trong `action=wishes`) hoặc đã bị xoá thì không có.
+- Không dùng cache. API cũ chưa có action này trả `error: "validation"`; web khi đó giữ nguyên danh sách chờ duyệt.
+- Cache `action=wishes` giảm từ 60 xuống 20 giây; dòng thiếu `id` hoặc nội dung (xoá dở) bị bỏ qua.

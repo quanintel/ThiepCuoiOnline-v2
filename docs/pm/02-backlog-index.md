@@ -5,7 +5,7 @@ Vai trò: **BA**, **UX** (UI/UX), **FE**, **PM**, **Chủ** (chủ dự án). Ch
 | Epic | Tên | File | Số task | Phụ thuộc |
 |---|---|---|---|---|
 | E0 | Khởi tạo & nền tảng | [E0](tasks/E0-khoi-tao.md) | 5 | — |
-| E1 | Bìa, hero, cặp đôi | [E1](tasks/E1-bia-hero-cap-doi.md) | 4 | E0 |
+| E1 | Bìa, cặp đôi (hero: đã bỏ) | [E1](tasks/E1-bia-hero-cap-doi.md) | 3 | E0 |
 | E2 | Lễ, gia đình, bản đồ (lịch trình: đã bỏ) | [E2](tasks/E2-le-gia-dinh-ban-do-lich-trinh.md) | 4 | E0 |
 | E3 | Album & lightbox | [E3](tasks/E3-album.md) | 3 | E0 |
 | E4 | Đếm ngược & lịch | [E4](tasks/E4-dem-nguoc-lich.md) | 4 | E2 (dữ liệu lễ) |
@@ -22,4 +22,4 @@ Vai trò: **BA**, **UX** (UI/UX), **FE**, **PM**, **Chủ** (chủ dự án). Ch
 - FE: [kiến trúc](../fe/01-kien-truc.md), [thư mục](../fe/02-cau-truc-thu-muc.md), [thư viện](../fe/03-thu-vien-shadcn.md), [API](../fe/04-api-contract-apps-script.md), [build/deploy](../fe/05-build-deploy-nginx.md), [kiểm thử](../fe/06-kiem-thu.md).
 
 ## Bản đồ FR → epic
-FR-01,16 → E1,E8 · FR-02,03 → E1 · FR-04,05,10,17 → E2 (FR-11 đã bỏ) · FR-06 → E3 · FR-07,08,09 → E4 · FR-12 → E5,E6 · FR-13,14 → E5,E7 · FR-15 → E8 · FR-18 → E0,E10.
+FR-01,16 → E1,E8 · FR-03 → E1 (FR-02 đã bỏ) · FR-04,05,10,17 → E2 (FR-11 đã bỏ) · FR-06 → E3 · FR-07,08,09 → E4 · FR-12 → E5,E6 · FR-13,14 → E5,E7 · FR-15 → E8 · FR-18 → E0,E10.
